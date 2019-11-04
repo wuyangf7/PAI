@@ -1,10 +1,10 @@
 ###################################################################################
-#####			show the Hi-C correlation plot with SMR (24.10.2018)          #####
-#####			   show the TAD annotation from Rao et al.           		  #####
+#####		show the Hi-C loops from Grubert et al. with PAIs             #####
+#####		     show the TAD annotation from Rao et al.           	      #####
 ###################################################################################
-#############################################################
+#####################################################################
 #############		Fig. 2d, MAD1L1 locus		#############
-#############################################################
+#####################################################################
 #####	 Extract regional Hi-C data
 file="/shares/compbio/Group-Yang/y.wu/interaction/data/HiC/HiC.GM12878.correlations.txt.gz"
 zcat $file | awk '{if ($1==7 && $6>=1000000 && $6<=3000000 && $7>=1000000 && $7<=3000000) print $0}' > /shares/compbio/Group-Yang/y.wu/interaction/HiC/plotdata/MAD1L1.txt
@@ -62,9 +62,9 @@ for(i in 1:length(tadpos1)){
 	idx2=which.min(abs(as.numeric(rownames(dat))-tadpos2[i]))
 	rect(idx1,num-idx1+1,idx2,num-idx2+1,col=NA,border=T,lwd=2)	
 }
-#############################################################
+#####################################################################
 #############		Fig. S3a, RNASET2 locus		#############
-#############################################################
+#####################################################################
 file="/shares/compbio/Group-Yang/y.wu/interaction/data/HiC/HiC.GM12878.correlations.txt.gz"
 zcat $file | awk '{if ($1==6 && $6>=166740000 && $6<=168120000 && $7>=166740000 && $7<=168120000) print $0}' > /shares/compbio/Group-Yang/y.wu/interaction/HiC/plotdata/RNASET2.txt
 #####	 Hi-C correlation plot
@@ -122,9 +122,9 @@ for(i in 1:length(tadpos1)){
 	idx2=which.min(abs(as.numeric(rownames(dat))-tadpos2[i]))
 	rect(idx1,num-idx1+1,idx2,num-idx2+1,col=NA,border=T,lwd=2)	
 }
-#############################################################
+#####################################################################
 #############		Fig. S3b, ABCB9 locus		#############
-#############################################################
+#####################################################################
 file="/shares/compbio/Group-Yang/y.wu/interaction/data/HiC/HiC.GM12878.correlations.txt.gz"
 zcat $file | awk '{if ($1==12 && $6>=123320000 && $6<=124130000 && $7>=123320000 && $7<=124130000) print $0}' > /shares/compbio/Group-Yang/y.wu/interaction/HiC/plotdata/ABCB9.txt
 #####	 Hi-C correlation plot
@@ -181,6 +181,6 @@ for(i in 1:length(tadpos1)){
 	idx2=which.min(abs(as.numeric(rownames(dat))-tadpos2[i]))
 	rect(idx1,num-idx1+1,idx2,num-idx2+1,col=NA,border=T,lwd=2)	
 }
-#############################################################
-#############				Endl				#############
-#############################################################
+#####################################################################
+#############			end			#############
+#####################################################################
