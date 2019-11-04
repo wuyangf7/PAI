@@ -1,9 +1,9 @@
 # 	   Partition the Hi-C loops from Jung et al. 2019 NG 	  #
 # 	  to different confidence sets and see the enrichment     #
-# 				for each predictive method					  #
-#############################################################
-   # True and False Hi-C loops at different FDR threshold #
-#############################################################
+# 				for each predictive method	  #
+###################################################################
+     # True and False Hi-C loops at different FDR threshold #
+###################################################################
 library(data.table); library(stringr)
 setwd("/shares/compbio/Group-Yang/y.wu/interaction/HiC/JungData/")
 PP = fread("GM.pp.txt",head=T,data.table=F,check.names=F)
@@ -30,10 +30,10 @@ for(t in 1:length(thresh)) {
 	write.table(false,paste0("./Partition/false_",thresh[t],".bedpe"),row=F,col=F,sep="\t",qu=F)
 }
 ################################################################################################ 
-				      				# Data formating #
+				      # Data formating #
 ################################################################################################
 ############################################################# 
-		 # sig. and non-sig. PAIs in bedpe format #
+	# sig. and non-sig. PAIs in bedpe format #
 #############################################################
 setwd("/shares/compbio/Group-Yang/y.wu/interaction/HiC/"); library(data.table); options(scipen=999)
 all=fread("/shares/compbio/Group-Yang/y.wu/interaction/P2E/jobsraw/ruleout/Blood_m2msmr_all_exclmhc_rmdup.txt",head=T,sep="\t",data.table=F)
@@ -48,7 +48,7 @@ write.table(rannonsig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JinData/P
 write.table(sig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JinData/Partition/sigDNAm.bedpe",row=F,,col=F,sep="\t",qu=F)
 write.table(nonsig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JinData/Partition/nonsigDNAm.bedpe",row=F,,col=F,sep="\t",qu=F)
 ############################################################# 
-		 	# DNAm based correlation method #
+	     # DNAm based correlation method #
 #############################################################
 all=fread("/shares/compbio/Group-Yang/y.wu/interaction/P2E/jobsraw/ruleout/Blood_m2msmr_all_exclmhc_rmdup.txt",head=T,sep="\t",data.table=F)
 sig=read.table("/shares/compbio/Group-Yang/y.wu/interaction/res/Blood_m2msmr_pass_heidi_exclmhc_rmdup.txt",head=T,sep="\t")
@@ -60,7 +60,7 @@ sig = allbedpe[sigidx,]; nonsig = allbedpe[-sigidx,];
 write.table(sig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JungData/sample/sigCorr.bedpe",row=F,,col=F,sep="\t",qu=F)
 write.table(nonsig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JungData/sample/nonsigCorr.bedpe",row=F,,col=F,sep="\t",qu=F)
 ############################################################# 
-	# chromatin accessibility based correlation method #
+    # chromatin accessibility based correlation method #
 #############################################################
 c2call=fread("/shares/compbio/Group-Yang/y.wu/interaction/CApeak/c2csmr_CaCor_all.txt",data.table=F, head=T)
 c2call$Expo_Chr=paste0("chr",c2call$Expo_Chr); c2call$Outco_Chr=paste0("chr",c2call$Outco_Chr)
@@ -71,7 +71,7 @@ sig = c2callbedpe[sigidx,]; nonsig = c2callbedpe[-sigidx,];
 write.table(sig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JungData/sample/sigCACorr.bedpe",row=F,,col=F,sep="\t",qu=F)
 write.table(nonsig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JungData/sample/nonsigCACorr.bedpe",row=F,,col=F,sep="\t",qu=F)
 ############################################################# 
-		 # PAIs using chromatin accessibility #
+	   # PAIs using chromatin accessibility #
 #############################################################
 c2call=fread("/shares/compbio/Group-Yang/y.wu/interaction/CApeak/c2csmr_CaCor_all.txt",data.table=F, head=T)
 c2call$Expo_Chr=paste0("chr",c2call$Expo_Chr); c2call$Outco_Chr=paste0("chr",c2call$Outco_Chr)
@@ -83,7 +83,7 @@ sig = c2callbedpe[sigidx,]; nonsig = c2callbedpe[-sigidx,];
 write.table(sig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JungData/sample/sigCASMR.bedpe",row=F,col=F,sep="\t",qu=F)
 write.table(nonsig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JungData/sample/nonsigCASMR.bedpe",row=F,col=F,sep="\t",qu=F)
 ############################################################# 
-		  # PHM using chromatin accessibility #
+            # PHM using chromatin accessibility #
 #############################################################
 library(data.table)
 PP = fread("gunzip -c /shares/compbio/Group-Yang/y.wu/database/caQTL/posterior_prob.tsv.gz",head=T)
@@ -97,10 +97,10 @@ sig = outdat[sigidx,]; nonsig = outdat[-sigidx,]
 write.table(sig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JungData/sample/sigCAPHM.bedpe",row=F,,col=F,sep="\t",qu=F)
 write.table(nonsig,"/shares/compbio/Group-Yang/y.wu/interaction/HiC/JungData/sample/nonsigCAPHM.bedpe",row=F,,col=F,sep="\t",qu=F)
 ################################################################################################ 
-				      				# Overlap analysis #
+				      # Overlap analysis #
 ################################################################################################
 ############################################################# 
-				      # HiC overlap #
+			# HiC overlap #
 #############################################################
 pgltools="/shares/compbio/Group-Yang/y.wu/interaction/HiC/pgltools-master/sh/pgltools"
 sigDNAm="/shares/compbio/Group-Yang/y.wu/interaction/HiC/JinData/Partition/sigDNAm"
@@ -133,39 +133,39 @@ for(t in 1:length(thresh)) {
 	fncmd1 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigDNAm,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
 	system(tpcmd1); system(tncmd1);
 	system(fpcmd1); system(fncmd1);
-	# tpcmd2 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",ransigDNAm,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"ran_true_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# tncmd2 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",rannonsigDNAm,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"ran_true_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# fpcmd2 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",ransigDNAm,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"ran_false_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# fncmd2 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",rannonsigDNAm,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"ran_false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# system(tpcmd2); system(tncmd2);
-	# system(fpcmd2); system(fncmd2); 
-	# tpcmd3 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCorr,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"Corr_true_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# tncmd3 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCorr,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"Corr_true_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# fpcmd3 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCorr,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"Corr_false_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# fncmd3 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCorr,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"Corr_false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# system(tpcmd3); system(tncmd3);
-	# system(fpcmd3); system(fncmd3);
-	# tpcmd4 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCACorr,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CACorr_true_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# tncmd4 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCACorr,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CACorr_true_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# fpcmd4 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCACorr,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CACorr_false_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# fncmd4 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCACorr,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CACorr_false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# system(tpcmd4); system(tncmd4);
-	# system(fpcmd4); system(fncmd4); 
-	# tpcmd5 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCASMR,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CASMR_true_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# tncmd5 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCASMR,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CASMR_true_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# fpcmd5 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCASMR,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CASMR_false_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# fncmd5 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCASMR,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CASMR_false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# system(tpcmd5); system(tncmd5);
-	# system(fpcmd5); system(fncmd5);
-	# tpcmd6 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCAPHM,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CAPHM_true_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# tncmd6 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCAPHM,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CAPHM_true_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# fpcmd6 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCAPHM,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CAPHM_false_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# fncmd6 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCAPHM,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CAPHM_false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
-	# system(tpcmd6); system(tncmd6);
-	# system(fpcmd6); system(fncmd6); 
+	tpcmd2 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",ransigDNAm,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"ran_true_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	tncmd2 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",rannonsigDNAm,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"ran_true_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	fpcmd2 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",ransigDNAm,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"ran_false_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	fncmd2 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",rannonsigDNAm,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"ran_false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	system(tpcmd2); system(tncmd2);
+	system(fpcmd2); system(fncmd2); 
+	tpcmd3 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCorr,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"Corr_true_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	tncmd3 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCorr,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"Corr_true_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	fpcmd3 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCorr,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"Corr_false_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	fncmd3 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCorr,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"Corr_false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	system(tpcmd3); system(tncmd3);
+	system(fpcmd3); system(fncmd3);
+	tpcmd4 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCACorr,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CACorr_true_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	tncmd4 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCACorr,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CACorr_true_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	fpcmd4 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCACorr,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CACorr_false_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	fncmd4 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCACorr,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CACorr_false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	system(tpcmd4); system(tncmd4);
+	system(fpcmd4); system(fncmd4); 
+	tpcmd5 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCASMR,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CASMR_true_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	tncmd5 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCASMR,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CASMR_true_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	fpcmd5 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCASMR,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CASMR_false_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	fncmd5 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCASMR,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CASMR_false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	system(tpcmd5); system(tncmd5);
+	system(fpcmd5); system(fncmd5);
+	tpcmd6 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCAPHM,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CAPHM_true_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	tncmd6 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCAPHM,".pgl -b ",junghicdir,"true_",thresh[t],".pgl -wa > ",junghicdir,"CAPHM_true_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	fpcmd6 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",sigCAPHM,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CAPHM_false_pos_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	fncmd6 = paste0("Rscript ~/bin/rsub.R '",pgltools," intersect -a ",nonsigCAPHM,".pgl -b ",junghicdir,"false_",thresh[t],".pgl -wa > ",junghicdir,"CAPHM_false_neg_",thresh[t],"_overlap.pgl'"," @overlap %30 T1 W5")
+	system(tpcmd6); system(tncmd6);
+	system(fpcmd6); system(fncmd6); 
 }
 ############################################################# 
-		  # 	compute the fold enrichment 	 # 
+	 # 	compute the fold enrichment 	 # 
 #############################################################
 junghicdir="/shares/compbio/Group-Yang/y.wu/interaction/HiC/JungData/Partition/"
 thresh = c(0.05,0.1,0.15,0.2,0.25,0.3,0.5,0.8,1,1.5,1.7,2:10)
@@ -275,8 +275,7 @@ for(i in 1:length(thresh)) {
 	CICAPHMhigh = c(CICAPHMhigh, hightmp6)
 }
 #############################################################
-	 #combined plot wiht CHIA-PET enrich (23.10.2019)#
-	 		# include PHM results and bar plot #
+        #combined plot with chromatin loop enrich #
 #############################################################
 CHIAPETobsv=2315;HiCobsv=130;
 CHIAPETnull=read.table("/shares/compbio/Group-Yang/y.wu/interaction/HiC/enrich/res/nullDNAm_001_distM_rmMHC_CHIAPET.txt",head=F)
@@ -291,7 +290,7 @@ layout(matrix(c(1,2,3,3),nrow=2,byrow=T))
 h=hist(HiCnull[,1],breaks=50,col=c(rep("peru",215)),xlim=c(60,140),xlab="Number of overlaps with loops",main="Hi-C (Rao et al.)",cex.axis=1.5,cex.lab=1.5,cex.main=1.5)
 abline(v=HiCobsv,lty=2,lwd=2,col="red"); #mtext("b",side=3,line=0.5,adj=-0.15,cex=1.8,col="black",font=1)
 mtext("a",side=3,line=0.5,adj=-0.2,cex=2.5,col="black",font=1)
-#####		ChIA-PET loops
+#####		ChIA-PET loops from the ENCODE
 h=hist(CHIAPETnull[,1],breaks=50,col=c(rep("darkolivegreen1",215)),xlim=c(1400,2500),xlab="Number of overlaps with loops",main="ChIA-PET (POLR2A)",cex.axis=1.5,cex.lab=1.5,cex.main=1.5)
 abline(v=CHIAPETobsv,lty=2,lwd=2,col="red"); 
 mtext("b",side=3,line=0.5,adj=-0.2,cex=2.5,col="black",font=1)
@@ -315,4 +314,5 @@ abline(h=1,lty=2,col="red")
 mtext("c",side=3,line=0.5,adj=-0.1,cex=2.5,col="black",font=1)
 dev.off()
 #############################################################
+			# end #
 #############################################################
