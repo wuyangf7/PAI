@@ -1,5 +1,5 @@
 ################################################################################## 
-#							   # configuration #				   			     # 	
+				# configuration #				   			     
 ##################################################################################
 SMR="/shares/compbio/Group-Yang/uqfzhan7/bin/smr_linux"
 MLTSMR="/shares/compbio/Group-Yang/y.wu/program/mtsmr/mtSMR0.10/mltsmr"
@@ -25,7 +25,7 @@ EXPROBES="/shares/compbio/Group-Yang/y.wu/SMRdata/MHC_probes.list"
 GENELIST="/shares/compbio/Group-Yang/y.wu/database/refseq_isoform_SMR.txt"
 DIR="/shares/compbio/Group-Yang/y.wu/allSMR/"
 ######################################################## 
-#				  	 # C2C #						   #	
+			 # C2C #						   
 ########################################################
 OUTPUT=$DIR"c2csmr/"
 for((i=1;i<=22;i++))
