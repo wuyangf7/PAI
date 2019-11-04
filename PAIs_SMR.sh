@@ -1,6 +1,6 @@
-########################################## 
-			#DNAm interactions
-##########################################
+################################################################# 
+			# DNAm interactions
+#################################################################
 COHORT="Blood"
 SMR="/shares/compbio/Group-Yang/uqfzhan7/bin/smr_linux"
 METHY="/shares/compbio/PCTG/meQTL/LBC_BSGS/meta_meqtl_chr"
@@ -11,9 +11,9 @@ HRSSNPLIST="/shares/compbio/Group-Yang/t.qi/data/SepIDs/hrs_1kg_impRsq_0.3.snpli
 EXPROBES="/shares/compbio/Group-Yang/y.wu/omic2/QC/excl_mhc_tqtl_mprbs.list"
 EXSNPS="/shares/compbio/Group-Yang/y.wu/SMRdata/MHC_snps.list"
 GENELIST="/shares/compbio/Group-Yang/y.wu/database/refseq_isoform_SMR.txt"
-###########################################  
-			 #P2E (including)  
-###########################################
+#################################################################  
+			 # P2E (including)  
+#################################################################
 OUTPUT="/shares/compbio/Group-Yang/y.wu/interaction/P2E/jobsraw/"
 for((i=1;i<=22;i++))
 do
@@ -23,9 +23,9 @@ rsub "${SMR} --beqtl-summary ${METHY}${i} --extract-exposure-probe ${ProProbes} 
  --maf 0.01 --cis-wind 2000 --out ${OUTPUT}${COHORT}_m2msmr_chr${i} --thread-num 20 \
  > ${OUTPUT}${COHORT}_m2msmr_chr${i}.log 2>&1" @interaction %4 T7 W150
 done
-########################################### 
-	#Exclude DNAm pairs in same promoter 
-###########################################
+################################################################# 
+     	      # Exclude DNAm pairs in same promoter 
+#################################################################
 promp=read.table("/shares/compbio/Group-Yang/y.wu/interaction/data/methylation_promoters.txt",head=F)
 megeo=read.table("/shares/compbio/Group-Yang/y.wu/database/GPL16304-47833.txt",skip=22,head=T,sep="\t")
 indir="/shares/compbio/Group-Yang/y.wu/interaction/P2E/jobsraw/"
@@ -42,9 +42,9 @@ for (i in 1:22) {
 	data$Outco_Gene=megeo$Closest_TSS_gene_name[outcindx]
 	write.table(data,paste(outdir,"Blood_m2msmr_chr",i,".smr",sep=""),row=F,qu=F,sep="\t")
 }
-########################################### 
-				#summarize  
-###########################################
+#################################################################
+			   # summarize  
+#################################################################
 setwd("/shares/compbio/Group-Yang/y.wu/interaction/P2E/jobsraw/ruleout/")
 datall=c()
 for(i in 1:22) {
@@ -56,9 +56,9 @@ for(i in 1:22) {
 	}
 }
 write.table(datall,"/shares/compbio/Group-Yang/y.wu/interaction/P2E/jobsraw/ruleout/Blood_m2msmr_all.txt",row=F,sep="\t",qu=F)
-########################################### 
-				#remove MHC  
-###########################################
+#################################################################
+		          # remove MHC  
+#################################################################
 library(data.table)
 all = fread("/shares/compbio/Group-Yang/y.wu/interaction/P2E/jobsraw/ruleout/Blood_m2msmr_all.txt",head=T,data.table=F,sep="\t",stringsAsFactors=F)
 #####			MHC region
@@ -67,9 +67,9 @@ allmhc = which( (all$Expo_Chr==6 & all$Expo_bp>=mhcStart & all$Expo_bp<=mhcEnd) 
 all = all[-allmhc,]
 outfile2 = "/shares/compbio/Group-Yang/y.wu/interaction/P2E/jobsraw/ruleout/Blood_m2msmr_all_exclmhc.txt"
 write.table(all,outfile2,row=F,sep="\t",qu=F)
-########################################### 
-		#remove duplicated pairs  
-###########################################
+################################################################ 
+   		    # remove duplicated pairs  
+################################################################
 library(data.table)
 outdir = "/shares/compbio/Group-Yang/y.wu/interaction/final/"
 all = fread("/shares/compbio/Group-Yang/y.wu/interaction/P2E/jobsraw/ruleout/Blood_m2msmr_all_exclmhc.txt",head=T,data.table=F)
@@ -92,6 +92,6 @@ outfile1 = paste0(outdir,"Blood_m2msmr_all_exclmhc_rmdup.txt")
 outfile2 = paste0(outdir,"Blood_m2msmr_pass_heidi_exclmhc_rmdup.txt")
 write.table(all,outfile1,row=F,sep="\t",qu=F)
 write.table(sig,outfile2,row=F,sep="\t",qu=F)
-############################################# 
-				  #Endl#  
-#############################################
+################################################################# 
+			    # end #  
+#################################################################
