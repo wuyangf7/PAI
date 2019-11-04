@@ -1,7 +1,7 @@
-###		1. gene activity enrichment with all genes as controls
-###		2. gene activity enrichment for Hi-C prediction from Jung et al.
+###	1. gene activity enrichment with all GTEx blood genes as controls
+###	2. gene activity enrichment for PCHi-C predicted genes from Jung et al.
 ####################################################################
-	   # Expression Enrichment with all genes as controls #
+       # Expression Enrichment with all genes as controls #
 ####################################################################
 library(data.table)
 smr=read.table("/shares/compbio/Group-Yang/y.wu/interaction/res/Blood_m2msmr_pass_heidi_exclmhc.txt",head=T,sep="\t",stringsAsFactors=F)
@@ -54,7 +54,7 @@ for(i in 1:1000){
 }
 pnonSMR = apply(pnull,2,mean); pnonsdSMR = apply(pnull,2,sd)
 ####################################################################
-	   # Expression Enrichment for Hi-C from Jung et al. #
+	 # Expression Enrichment for Hi-C from Jung et al. #
 ####################################################################
 ###		 download the supplementary to get the gene list
 library(data.table); library(stringr)
@@ -95,7 +95,7 @@ for(i in 1:1000){
 }
 pnonloop = apply(pnull,2,mean); pnonsdloop = apply(pnull,2,sd)
 ###################################################
-#					# plot (18.10.19)		      #	
+       		     # plot #		  	
 ###################################################
 dataSMR=cbind(psigSMR,pnonSMR);dataSMRse=cbind(c(0,0,0,0,0),pnonsdSMR)
 dataloop=cbind(psigloop,pnonloop);dataloopse=cbind(c(0,0,0,0,0),pnonsdloop)
