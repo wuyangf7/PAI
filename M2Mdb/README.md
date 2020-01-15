@@ -5,4 +5,4 @@ Citation: Wu Y, Qi T, Wang H, Zhang F, Zheng Z, Phillips-Cremins JE, Deary IJ, M
 
 Credits: Yang Wu, Ting Qi and Jian Yang at the Program in Complex Trait Genomics, The University of Queensland
 
-Troubleshooting: Jian Yang
+Troubleshooting: [Jian Yang](mailto:jian.yang@uq.edu.au)
