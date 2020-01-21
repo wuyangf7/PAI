@@ -17,6 +17,6 @@ Here we provide an example to predict the promoter-anchored chromatin interactio
 smr --bfile mydata --beqtl-summary myDNAm --extract-exposure-probe DNAmInPromoter --beqtl-summary myDNAm  --out myPAIs
 ```
 
- --bfile  reads individual-level SNP genotype data (in PLINK binary format) from a reference sample for LD estimation, i.e. .bed, .bim, and .fam files.
---beqtl-summary the first one reads mQTL summary data as the exposure and the second one reads mQTL summary data from as the outcome. 
---extract-exposure-probe extracts a subset of exposure DNAm probes in promoter regions for PAI analysis.
+* --bfile  reads individual-level SNP genotype data (in PLINK binary format) from a reference sample for LD estimation, i.e. .bed, .bim, and .fam files.
+* --beqtl-summary the first one reads mQTL summary data as the exposure and the second one reads mQTL summary data from as the outcome. 
+* --extract-exposure-probe extracts a subset of exposure DNAm probes in promoter regions for PAI analysis.
