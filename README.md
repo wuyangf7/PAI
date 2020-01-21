@@ -11,7 +11,7 @@ https://www.biorxiv.org/content/10.1101/580993v1
 
 Our analytical approach relies on two recently developed methods, i.e., the summary-data–based Mendelian randomization (SMR) test and the test for heterogeneity in dependent instruments (HEIDI). To install SMR, you can download the smr_Linux.zip package from the SMR website (http://cnsgenomics.com/software/smr/#Overview), which contains a standalone (i.e., statically linked) 64-bit Linux executable file smr_Linux. We strongly recommend using this static executable because it is well-optimized and no further installation is required. 
 
-Here we provide an example to predict the promoter-anchored chromatin interactions using mQTL summary data from peripheral blood samples. In this case, we will need the mQTL summary data in BESD format. We then focus on testing for pleiotropic associations of a DNAm site in the promoter region of a gene with all the other DNAm sites within 2 Mb of the focal promoter in either direction. 
+Here we provide an example to predict the promoter-anchored chromatin interactions using mQTL summary data from peripheral blood samples. In this case, we will need the mQTL summary data in BESD format (http://cnsgenomics.com/software/smr/#DataManagement). We then focus on testing for pleiotropic associations of a DNAm site in the promoter region of a gene with all the other DNAm sites within 2 Mb of the focal promoter in either direction. 
 
 ```
 smr --bfile mydata --beqtl-summary myDNAm --extract-exposure-probe DNAmInPromoter --beqtl-summary myDNAm  --out myPAIs
