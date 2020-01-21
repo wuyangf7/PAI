@@ -1,4 +1,4 @@
-# PAI
+# PAI (promoter-anchored chromatin interactions)
 This repository provides the scripts to implement the SMR and HEIDI methods to predict the promoter-anchored chromatin interactions using summary-level molecular quantitative trait locus (QTL) data. The package includes a shiny visualization tool to visualize and download the predicted interaction results computed using summary-level DNA methylation QTL data. 
 
 **Reference**
